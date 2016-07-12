@@ -1,0 +1,21 @@
+mysql:
+  image: mysql:v1
+  environment:
+    - MYSQL_USER=root
+    - MYSQL_DATABASE=test
+    - MYSQLPASSWORD=root
+
+
+AppServer:
+  image: java_app_v1
+  ports:
+    - "8006:8080"
+  links:
+    - mysql
+  environment:
+    - database_driverClassName=com.mysql.jdbc.Driver
+    - database_url=jdbc:mysql://mysql:3306/test
+    - database_username=root
+    - database_password=root
+
+
