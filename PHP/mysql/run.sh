@@ -2,10 +2,10 @@
 set -e
 chown -R mysql:mysql /var/lib/mysql
 mysql_install_db --user mysql > /dev/null
-MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-"root"}
-MYSQL_DATABASE=${MYSQL_DATABASE:-"test"}
-MYSQL_USER=${MYSQL_USER:-"root"}
-MYSQL_PASSWORD=${MYSQL_PASSWORD:-"root"}
+MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-"admin"}
+MYSQL_DATABASE=${MYSQL_DATABASE:-"br"}
+MYSQL_USER=${MYSQL_USER:-"admin"}
+MYSQL_PASSWORD=${MYSQL_PASSWORD:-"admin"}
 MYSQLD_ARGS=${MYSQLD_ARGS:-""}
 tfile=`mktemp`
 if [[ ! -f "$tfile" ]]; then
@@ -30,7 +30,7 @@ fi
 /usr/sbin/mysqld --bootstrap --verbose=0 $MYSQLD_ARGS < $tfile
 #/usr/sbin/mysqld --bootstrap --verbose=0 $MYSQLD_ARGS
 /etc/init.d/mysql start > /dev/null
-mysql -u root -proot test < ems.sql
+mysql -u admin -padmin br < br.sql
 /etc/init.d/mysql stop > /dev/null
 #rm -f $tfile
 exec /usr/sbin/mysqld $MYSQLD_ARGS

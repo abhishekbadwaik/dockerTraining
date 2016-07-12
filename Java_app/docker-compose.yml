@@ -1,5 +1,7 @@
 mysql:
-  image: mysql:v1
+  image: mysql_ems
+  ports:
+    - "3308:3306"
   environment:
     - MYSQL_USER=root
     - MYSQL_DATABASE=test
@@ -7,14 +9,12 @@ mysql:
 
 
 AppServer:
-  image: java_app_v1
+  image: java_ems_demo
   ports:
     - "8006:8080"
-  links:
-    - mysql
   environment:
     - database_driverClassName=com.mysql.jdbc.Driver
-    - database_url=jdbc:mysql://mysql:3306/test
+    - database_url=jdbc:mysql://172.27.59.8:3308/test
     - database_username=root
     - database_password=root
 
