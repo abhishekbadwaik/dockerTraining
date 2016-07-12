@@ -3,7 +3,7 @@ FROM ubuntu
 
 RUN apt-get update
 
-ENV TOMCATVER 7.0.69
+ENV TOMCATVER 7.0.70
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --force-yes openjdk-7-jre-headless wget
 RUN (wget -O /tmp/tomcat7.tar.gz http://www.us.apache.org/dist/tomcat/tomcat-7/v${TOMCATVER}/bin/apache-tomcat-${TOMCATVER}.tar.gz && \
